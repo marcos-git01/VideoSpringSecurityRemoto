@@ -63,48 +63,56 @@ public class LibroServicio {
     }
     
     @Transactional
-    public void modificarLibro(Long isbn, String titulo, Integer ejemplares, String idAutor, String idEditorial) throws MiException{
-        
+    public void modificarLibro(Long isbn, String titulo, Integer ejemplares, String idAutor, String idEditorial) throws MiException {
+
         validar(isbn, titulo, ejemplares, idAutor, idEditorial);
-        
+
         Optional<Libro> respuesta = libroRepositorio.findById(isbn);
-        
-        Optional<Autor> respuestaAutor = autorRepositorio.findById(idAutor);
-        
-        Optional<Editorial> respuestaEditorial = editorialRepositorio.findById(idEditorial);
-        
-        Autor autor = new Autor();
-        Editorial editorial = new Editorial();
-        
-        if (respuestaAutor.isPresent()) {
-            
-            autor = respuestaAutor.get();
-                   
-        }
-        
-        if (respuestaEditorial.isPresent()) {
-            
-            editorial = respuestaEditorial.get();
-                   
-        }
-        
-        
+
         if (respuesta.isPresent()) {
-            
+
             Libro libro = respuesta.get();
-            
+
             libro.setTitulo(titulo);
-            
-            libro.setAutor(autor);
-            
-            libro.setEditorial(editorial);
-            
+
             libro.setEjemplares(ejemplares);
-            
+
+            if (idAutor != null) {
+
+                Optional<Autor> respuestaAutor = autorRepositorio.findById(idAutor);
+
+                if (respuestaAutor.isPresent()) {
+
+                    Autor autor;
+
+                    autor = respuestaAutor.get();
+
+                    libro.setAutor(autor);
+
+                }
+
+            }
+
+            if (idEditorial != null) {
+
+                Optional<Editorial> respuestaEditorial = editorialRepositorio.findById(idEditorial);
+
+                if (respuestaEditorial.isPresent()) {
+
+                    Editorial editorial;
+
+                    editorial = respuestaEditorial.get();
+
+                    libro.setEditorial(editorial);
+
+                }
+
+            }
+
             libroRepositorio.save(libro);
-            
+
         }
-        
+
     }
     
     @Transactional
