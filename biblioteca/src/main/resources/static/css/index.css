@@ -34,7 +34,7 @@
 .header{
     background-image: url(../img/FondoZoom_2.jpg);
     background-size: cover;
-    height: 550px;
+    height: 450px;
     display: flex;
     justify-content: end;
 }

@@ -60,4 +60,11 @@ public class PortalControlador {
         return "login.html";
     }
     
+    @GetMapping("/inicio")
+    public String inicio() {
+        return "inicio.html";
+        //return "index.html";
+    }
+    
+    
 }
