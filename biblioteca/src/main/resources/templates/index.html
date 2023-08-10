@@ -25,15 +25,16 @@
             </button>
             <div class="collapse navbar-collapse elementosNav" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto elementos">
+                    
                     <li class="nav-item">
-                        <a class="nav-link " th:if="${session.usuariosession == null}" href="/registrar" id="navbarDropdown" role="button" aria-expanded="false">
-                            Registrate!
+                        <a class="nav-link " th:if="${session.usuariosession == null}" href="/login" id="navbarDropdown" role="button" aria-expanded="false">
+                            Ingresar
                         </a>
 
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " th:if="${session.usuariosession == null}" href="/login" id="navbarDropdown" role="button" aria-expanded="false">
-                            LOGIN!
+                        <a class="nav-link " th:if="${session.usuariosession == null}" href="/registrar" id="navbarDropdown" role="button" aria-expanded="false">
+                            Registrate!
                         </a>
 
                     </li>
