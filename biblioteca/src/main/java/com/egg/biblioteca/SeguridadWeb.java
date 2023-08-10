@@ -30,7 +30,7 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
         
         http
                 .authorizeRequests()
-                        //.antMatchers("/admin/*").hasRole("ADMIN")
+                        .antMatchers("/admin/*").hasRole("ADMIN")
                         .antMatchers("/css/*", "/js/*", "/img/*", "/**")
                         .permitAll()
                 .and().formLogin()
@@ -42,10 +42,10 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
                         .permitAll()
                 .and().logout()
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/") //logoutSuccessUrl("/login")
-                        .permitAll();
-                //.and().csrf()
-                        //.disable();
+                        .logoutSuccessUrl("/login") //logoutSuccessUrl("/login")
+                        .permitAll()
+                .and().csrf()
+                        .disable();
         
     }
 

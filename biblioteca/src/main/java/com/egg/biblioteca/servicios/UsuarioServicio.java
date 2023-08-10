@@ -7,6 +7,7 @@ import com.egg.biblioteca.excepciones.MiException;
 import com.egg.biblioteca.repositorios.UsuarioRepositorio;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -51,6 +52,34 @@ public class UsuarioServicio implements UserDetailsService {
         usuarioRepositorio.save(usuario);
     }
     
+    @Transactional(readOnly=true)
+    public List<Usuario> listarUsuarios() {
+
+        List<Usuario> usuarios = new ArrayList();
+
+        usuarios = usuarioRepositorio.findAll();
+
+        return usuarios;
+    }
+    
+    @Transactional
+    public void cambiarRol(String id){
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+    	
+    	if(respuesta.isPresent()) {
+    		
+    		Usuario usuario = respuesta.get();
+    		
+    		if(usuario.getRol().equals(Rol.USER)) {
+    			
+    		usuario.setRol(Rol.ADMIN);
+    		
+    		}else if(usuario.getRol().equals(Rol.ADMIN)) {
+    			usuario.setRol(Rol.USER);
+    		}
+    	}
+    }
+    
     private void validar(String nombre, String email, String password, String password2) throws MiException {
 
         if (nombre.isEmpty() || nombre == null) {
@@ -82,11 +111,11 @@ public class UsuarioServicio implements UserDetailsService {
 
             permisos.add(p);
 
-            /*ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 
             HttpSession session = attr.getRequest().getSession(true);
 
-            session.setAttribute("usuariosession", usuario);*/
+            session.setAttribute("usuariosession", usuario);
 
             return new User(usuario.getEmail(), usuario.getPassword(), permisos);
         } else {
