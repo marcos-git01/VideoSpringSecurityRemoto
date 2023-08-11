@@ -15,7 +15,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                            <li><a class="dropdown-item" sec:authorize="hasAuthority('ADMIN')" th:href="@{/libro/registrar}">Crear Libro</a></li>
+                            <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/libro/registrar}">Crear Libro</a></li>
                             <li><hr class="dropdown-divider"></li>
 
                             <li><a class="dropdown-item" th:href="@{/libro/lista}">Listar Libros</a></li>
@@ -29,7 +29,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                            <li><a class="dropdown-item" sec:authorize="hasAuthority('ADMIN')" th:href="@{/autor/registrar}">Crear Autor</a></li>
+                            <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/autor/registrar}">Crear Autor</a></li>
                             <li><hr class="dropdown-divider"></li>
 
                             <li><a class="dropdown-item" th:href="@{/autor/lista}">Listar Autores</a></li>
@@ -44,33 +44,35 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                            <li><a class="dropdown-item" sec:authorize="hasAuthority('ADMIN')" th:href="@{/editorial/registrar}">Crear Editorial</a></li>
+                            <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/editorial/registrar}">Crear Editorial</a></li>
                             <li><hr class="dropdown-divider"></li>
 
                             <li><a class="dropdown-item" th:href="@{/editorial/lista}">Listar Editoriales</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Perfil
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/logout" >Cerrar Sesión</a></li>
                         </ul>
                     </li>
+                   
+                    <li class="nav-item">
+                        <a class="nav-link " th:if="${session.usuariosession == null}" href="/login" id="navbarDropdown" role="button" aria-expanded="false">
+                            Ingresar!
+                        </a>
 
+                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link " th:if="${session.usuariosession == null}" href="/registrar" id="navbarDropdown" role="button" aria-expanded="false">
                             Registrate!
                         </a>
 
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link " th:if="${session.usuariosession == null}" href="/login" id="navbarDropdown" role="button" aria-expanded="false">
-                            LOGIN!
-                        </a>
-
-                    </li>
+                    
                 </ul>
             </div>
         </nav>
