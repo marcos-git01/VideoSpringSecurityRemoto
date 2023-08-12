@@ -1,4 +1,3 @@
-
 package com.egg.biblioteca.entidades;
 
 import java.util.Date;
@@ -10,18 +9,18 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Libro {
-    
+
     @Id
     private Long isbn;
     private String titulo;
     private Integer ejemplares;
-    
+
     @Temporal(TemporalType.DATE)
     private Date alta;
-    
+
     @ManyToOne
     private Autor autor;
-    
+
     @ManyToOne
     private Editorial editorial;
 
@@ -75,7 +74,5 @@ public class Libro {
     public void setEditorial(Editorial editorial) {
         this.editorial = editorial;
     }
-    
-    
-    
+
 }

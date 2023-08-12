@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    
+
     <head th:replace= "/fragments/head_form :: head" ></head>
-    
+
     <body>
-        
+
         <nav th:replace= "/fragments/navbar :: nav" ></nav>
- 
+
         <div class="container-fluid m-5 contenedor">
 
             <form class="formulario" th:action="@{/autor/registro/}" method="POST">
                 <div class="form-group my-3">
-                    <label class="mb-2">Cargar Autores</label> 
+                    <label class="mb-2">Cargar Autor</label> 
                     <input type="text" class="form-control" name="nombre" placeholder="Nombre del Autor">
                 </div>
 
                 <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
             </form>
 
+            <br>
             <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
                 <div class="card-body">
                     <h5 class="card-title">Exito!</h5>

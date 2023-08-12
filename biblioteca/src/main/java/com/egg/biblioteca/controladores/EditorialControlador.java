@@ -1,4 +1,3 @@
-
 package com.egg.biblioteca.controladores;
 
 import com.egg.biblioteca.entidades.Editorial;
@@ -17,67 +16,67 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/editorial") //localhost:8080/editorial
 public class EditorialControlador {
-    
+
     @Autowired
     private EditorialServicio editorialServicio;
-    
+
     @GetMapping("/registrar") //localhost:8080/editorial/registrar
-    public String registrar(){
+    public String registrar() {
         return "editorial_form.html";
     }
-    
+
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre, ModelMap modelo) {
-        
+
         try {
             editorialServicio.crearEditorial(nombre);
             modelo.put("exito", "La Editorial fue registrada correctamente!");
         } catch (MiException ex) {
             modelo.put("error", ex.getMessage());
-            return "editorial_form.html"; 
+            return "editorial_form.html";
         }
-               
-        return "editorial_form.html"; 
+
+        return "editorial_form.html";
     }
-    
+
     @GetMapping("/lista") //localhost:8080/editorial/lista
-    public String listar(ModelMap modelo){
-        
+    public String listar(ModelMap modelo) {
+
         List<Editorial> editoriales = editorialServicio.listarEditoriales();
-        
+
         modelo.addAttribute("editoriales", editoriales);
-        
+
         return "editorial_list.html";
     }
-    
+
     @GetMapping("/modificar/{id}") //localhost:8080/editorial/modificar
-    public String modificar(@PathVariable String id, ModelMap modelo){
-        
+    public String modificar(@PathVariable String id, ModelMap modelo) {
+
         modelo.put("editorial", editorialServicio.getOne(id));
-      
+
         return "editorial_modificar.html";
     }
-    
+
     @PostMapping("/modificar/{id}")
     public String modificar(@PathVariable String id, String nombre, ModelMap modelo) {
-        
+
         try {
             editorialServicio.modificarEditorial(nombre, id);
-            
+
             //Ver esta linea si funciona?
             modelo.put("exito", "La Editorial fue modificada correctamente!");
-            
+
             return "redirect:../lista";
-            
+
         } catch (MiException ex) {
-            
+
             modelo.put("error", ex.getMessage());
-            
-            return "editorial_modificar.html"; 
+
+            return "editorial_modificar.html";
         }
-                       
+
     }
-    
+
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable String id, ModelMap modelo) throws MiException {
 
@@ -97,5 +96,5 @@ public class EditorialControlador {
         }
 
     }
-    
+
 }
