@@ -80,7 +80,7 @@ public class EditorialControlador {
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable String id, ModelMap modelo) throws MiException {
 
-        modelo.put("editorial", editorialServicio.getOne(id));
+        //modelo.put("editorial", editorialServicio.getOne(id));
         try {
 
             editorialServicio.eliminarEditorial(id);

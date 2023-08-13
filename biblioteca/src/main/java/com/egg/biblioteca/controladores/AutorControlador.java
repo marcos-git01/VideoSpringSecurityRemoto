@@ -82,7 +82,7 @@ public class AutorControlador {
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable String id, ModelMap modelo) throws MiException {
 
-        modelo.put("autor", autorServicio.getOne(id));
+        //modelo.put("autor", autorServicio.getOne(id));
         try {
 
             autorServicio.eliminarAutor(id);

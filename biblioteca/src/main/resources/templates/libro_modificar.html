@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    
+
     <head th:replace= "/fragments/head_form :: head" ></head>
-    
+
     <body>
-        
+
         <nav th:replace= "/fragments/navbar :: nav" ></nav>
-      
+
         <div class="container-fluid m-5 contenedor">
 
             <form class="formulario" th:action="@{/libro/modificar/__${libro.isbn}__}" method="POST">
