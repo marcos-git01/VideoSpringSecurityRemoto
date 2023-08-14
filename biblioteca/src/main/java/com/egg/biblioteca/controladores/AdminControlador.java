@@ -1,4 +1,3 @@
-
 package com.egg.biblioteca.controladores;
 
 import com.egg.biblioteca.entidades.Usuario;
@@ -14,28 +13,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin")
 public class AdminControlador {
-   
+
     @Autowired
     private UsuarioServicio usuarioServicio;
-    
-   @GetMapping("/dashboard")
-   public String panelAdministrativo(){
-       return "panel.html";
-   }
-   
-   @GetMapping("/usuarios")
+
+    @GetMapping("/dashboard")
+    public String panelAdministrativo() {
+        return "panel.html";
+    }
+
+    @GetMapping("/usuarios")
     public String listar(ModelMap modelo) {
         List<Usuario> usuarios = usuarioServicio.listarUsuarios();
         modelo.addAttribute("usuarios", usuarios);
 
         return "usuario_list";
     }
-    
+
     @GetMapping("/modificarRol/{id}")
-    public String cambiarRol(@PathVariable String id){
+    public String cambiarRol(@PathVariable String id) {
         usuarioServicio.cambiarRol(id);
-        
-       return "redirect:/admin/usuarios";
+
+        return "redirect:/admin/usuarios";
     }
-   
+
 }

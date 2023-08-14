@@ -1,4 +1,3 @@
-
 package com.egg.biblioteca.entidades;
 
 import com.egg.biblioteca.enumeraciones.Rol;
@@ -12,12 +11,12 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Usuario {
-    
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    
+
     private String nombre;
     private String email;
     private String password;
@@ -79,8 +78,4 @@ public class Usuario {
         this.imagen = imagen;
     }
 
-    
-    
-    
-    
 }

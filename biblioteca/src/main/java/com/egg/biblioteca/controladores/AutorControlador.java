@@ -5,6 +5,7 @@ import com.egg.biblioteca.excepciones.MiException;
 import com.egg.biblioteca.servicios.AutorServicio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,8 @@ public class AutorControlador {
 
     @Autowired
     private AutorServicio autorServicio;
-
+    
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')") //Ver esta linea aplicar a todos los metodos
     @GetMapping("/registrar") //localhost:8080/autor/registrar
     public String registrar() {
         return "autor_form.html";
@@ -40,7 +42,8 @@ public class AutorControlador {
 
         return "autor_form.html";
     }
-
+    
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/lista") //localhost:8080/autor/lista
     public String listar(ModelMap modelo) {
 

@@ -9,6 +9,7 @@ import com.egg.biblioteca.servicios.EditorialServicio;
 import com.egg.biblioteca.servicios.LibroServicio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class LibroControlador {
     @Autowired
     private EditorialServicio editorialServicio;
 
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/registrar") //localhost:8080/libro/registrar
     public String registrar(ModelMap modelo) {
 
@@ -73,6 +75,7 @@ public class LibroControlador {
         return "libro_form.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/lista") //localhost:8080/libro/lista
     public String listar(ModelMap modelo) {
 

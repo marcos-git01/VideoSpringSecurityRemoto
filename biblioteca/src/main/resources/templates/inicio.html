@@ -12,6 +12,7 @@
                 <div class="tituloBiblioteca">
                     <a class="navbar-brand" >BIBLIOTECA EGG</a>
                 </div>
+                
                 <div class="container contenedorLibros">
                     <p class="tituloLibros" th:if="${session.usuariosession != null}" th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></p>
                 </div>
@@ -20,6 +21,7 @@
                         <img class="logo"  th:src="@{/imagen/perfil/__${session.usuariosession.id}__}" >
                     </a>
                 </div>
+                
                 <div class="bg-circle-1 bg-circle"></div>
                 <div class="bg-circle-2 bg-circle"></div>
                 <div class="bg-circle-3 bg-circle"></div>

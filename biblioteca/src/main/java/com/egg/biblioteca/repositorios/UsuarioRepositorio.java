@@ -1,4 +1,3 @@
-
 package com.egg.biblioteca.repositorios;
 
 import com.egg.biblioteca.entidades.Usuario;
@@ -9,8 +8,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
-    
+
     @Query("SELECT u FROM Usuario u WHERE u.email = :email")
-    public Usuario buscarPorEmail(@Param("email")String email);
-    
+    public Usuario buscarPorEmail(@Param("email") String email);
+
 }
