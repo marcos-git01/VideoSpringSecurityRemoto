@@ -1,4 +1,3 @@
-
 package com.egg.biblioteca.entidades;
 
 import javax.persistence.Basic;
@@ -11,17 +10,18 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Imagen {
-    
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    
+
     private String mime;
-    
+
     private String nombre;
-    
-    @Lob @Basic(fetch = FetchType.LAZY)
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
     private byte[] contenido;
 
     public Imagen() {
@@ -58,7 +58,5 @@ public class Imagen {
     public void setContenido(byte[] contenido) {
         this.contenido = contenido;
     }
-    
-    
-    
+
 }
