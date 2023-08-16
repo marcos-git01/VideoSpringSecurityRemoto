@@ -84,6 +84,20 @@ public class UsuarioServicio implements UserDetailsService {
         }
 
     }
+    
+    @Transactional
+    public void eliminarUsuario(String id) throws MiException {
+
+        if (id.isEmpty() || id == null) {
+            throw new MiException("El Id del Usuario no puede ser nulo o estar vacio");
+        }
+
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+
+        if (respuesta.isPresent()) {
+            usuarioRepositorio.delete(respuesta.get());
+        }
+    }
 
     public Usuario getOne(String id) {
         return usuarioRepositorio.getOne(id);

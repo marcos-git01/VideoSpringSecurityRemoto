@@ -102,6 +102,7 @@
                         <th scope="col">Rol</th>
                         <th scope="col">Cambiar Rol</th>
                         <th scope="col">Modificar</th>
+                        <th scope="col">Eliminar</th>
 
                     </tr>
                 </thead>
@@ -121,6 +122,10 @@
 
                         <td>
                             <a th:href= "@{/admin/modificar/__${usuario.id}__}"><i class="fas fa-feather-alt"></i> Modificar</a>
+                        </td>
+                        
+                        <td>
+                            <a th:href= "@{/admin/eliminar/__${usuario.id}__}"><i class="fas fa-feather-alt"></i> Eliminar</a>
                         </td>
 
                     </tr>

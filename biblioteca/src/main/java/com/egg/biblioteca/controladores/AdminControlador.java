@@ -68,5 +68,24 @@ public class AdminControlador {
         }
 
     }
+    
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable String id, ModelMap modelo) throws MiException {
+        
+        try {
+
+            usuarioServicio.eliminarUsuario(id);
+
+            return "redirect:../usuarios";
+
+        } catch (MiException ex) {
+
+            modelo.put("error", ex.getMessage());
+
+            //return "noticia_eliminar.html";
+            return "redirect:../usuarios";
+        }
+
+    }
 
 }
