@@ -95,7 +95,8 @@ public class PortalControlador {
 
             modelo.put("exito", "Usuario actualizado correctamente!");
 
-            return "inicio.html";
+            //return "inicio.html";
+            return "usuario_modificar.html";
         } catch (MiException ex) {
 
             modelo.put("error", ex.getMessage());

@@ -68,7 +68,7 @@ public class UsuarioServicio implements UserDetailsService {
 
             usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 
-            usuario.setRol(Rol.USER);
+            usuario.setRol(usuario.getRol());//Ver esto mas tarde
 
             String idImagen = null;
 
@@ -116,6 +116,24 @@ public class UsuarioServicio implements UserDetailsService {
             }
         }
     }
+    
+    /*@Transactional
+    public void modificar(String id) {
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+
+        if (respuesta.isPresent()) {
+
+            Usuario usuario = respuesta.get();
+
+            if (usuario.getRol().equals(Rol.USER)) {
+
+                usuario.setRol(Rol.ADMIN);
+
+            } else if (usuario.getRol().equals(Rol.ADMIN)) {
+                usuario.setRol(Rol.USER);
+            }
+        }
+    }*/
 
     private void validar(String nombre, String email, String password, String password2) throws MiException {
 
