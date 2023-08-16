@@ -50,10 +50,10 @@ public class AdminControlador {
     }
 
     @PostMapping("/modificar/{id}")
-    public String modificar(@PathVariable String idUsuario, MultipartFile archivo, String nombre, String email, String password, String password2, ModelMap modelo) {
+    public String modificar(@PathVariable String id, MultipartFile archivo, String nombre, String email, String password, String password2, ModelMap modelo) {
 
         try {
-            usuarioServicio.actualizar(archivo, idUsuario, nombre, email, password, password2);
+            usuarioServicio.modificar(archivo, id, nombre, email, password, password2);
 
             //Ver esta linea si funciona?
             modelo.put("exito", "El Usuario fue modificado correctamente!");

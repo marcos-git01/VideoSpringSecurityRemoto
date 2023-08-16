@@ -131,23 +131,36 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
     
-    /*@Transactional
-    public void modificar(String id) {
-        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+    @Transactional
+    public void modificar(MultipartFile archivo, String idUsuario, String nombre, String email, String password, String password2) throws MiException {
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
 
         if (respuesta.isPresent()) {
 
             Usuario usuario = respuesta.get();
 
-            if (usuario.getRol().equals(Rol.USER)) {
+            usuario.setNombre(nombre);
+            usuario.setEmail(email);
 
-                usuario.setRol(Rol.ADMIN);
+            usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 
-            } else if (usuario.getRol().equals(Rol.ADMIN)) {
-                usuario.setRol(Rol.USER);
+            usuario.setRol(usuario.getRol());//Ver esto mas tarde
+
+            String idImagen = null;
+
+            if (usuario.getImagen() != null) {
+                idImagen = usuario.getImagen().getId();
             }
+
+            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+
+            usuario.setImagen(imagen);
+
+            usuarioRepositorio.save(usuario);
+            
+            
         }
-    }*/
+    }
 
     private void validar(String nombre, String email, String password, String password2) throws MiException {
 
