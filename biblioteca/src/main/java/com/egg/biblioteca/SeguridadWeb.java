@@ -28,23 +28,23 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                .authorizeRequests()
-                    .antMatchers("/admin/*").hasRole("ADMIN")
-                    .antMatchers("/css/*", "/js/*", "/img/*", "/**")
-                    .permitAll()
+                .authorizeRequests() //Va autorizar determinados parametros
+                .antMatchers("/admin/*").hasRole("ADMIN") //.antMatchers siempre que estemos ingresando a determinadas
+                .antMatchers("/css/*", "/js/*", "/img/*", "/**") // partes del sistema permita todos los archivos cuyas rutas tengan:
+                .permitAll() // Van a ser permitidos por cualquier persona que acceda al sistema
                 .and().formLogin()
-                    .loginPage("/login")
-                    .loginProcessingUrl("/logincheck")
-                    .usernameParameter("email")
-                    .passwordParameter("password")
-                    .defaultSuccessUrl("/inicio")
-                    .permitAll()
+                .loginPage("/login")
+                .loginProcessingUrl("/logincheck")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/inicio")
+                .permitAll()
                 .and().logout()
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/") //logoutSuccessUrl("/") con la / retorna al index
-                    .permitAll()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/") //logoutSuccessUrl("/") con la / retorna al index
+                .permitAll()
                 .and().csrf()
-                    .disable();
+                .disable();
 
     }
 

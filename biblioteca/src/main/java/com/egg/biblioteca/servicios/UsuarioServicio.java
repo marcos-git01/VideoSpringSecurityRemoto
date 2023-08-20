@@ -179,9 +179,11 @@ public class UsuarioServicio implements UserDetailsService {
         }
 
     }
-
+    
+    // Este metodo se utiliza para autenticar un usuario de nuestro dominio y 
+    // transformarlo en un usuario del dominio de Spring Security
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException { 
 
         Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
 
