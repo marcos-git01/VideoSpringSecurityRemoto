@@ -43,7 +43,9 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setEmail(email);
 
         //usuario.setPassword(password);
-        usuario.setPassword(new BCryptPasswordEncoder().encode(password));
+        
+        // Cuando se setea la contraseña al usuario tambien la vamos a codificar con BCryptPasswordEncoder()
+        usuario.setPassword(new BCryptPasswordEncoder().encode(password)); 
 
         usuario.setRol(Rol.USER);
 

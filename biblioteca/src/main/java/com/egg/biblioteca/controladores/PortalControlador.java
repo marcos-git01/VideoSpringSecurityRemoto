@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/")
 public class PortalControlador {
 
-    @Autowired
+    @Autowired //Una instancia unica de UsuarioServicio para poder utilizar sus metodos
     private UsuarioServicio usuarioServicio;
 
     @GetMapping("/")
@@ -32,20 +32,20 @@ public class PortalControlador {
         return "registro.html";
     }
 
-    @PostMapping("/registro")
+    @PostMapping("/registro") // Este metodo recibe todos los valores que nos envia el formulario registro.html
     public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password,
-            String password2, ModelMap modelo, MultipartFile archivo) {
+            String password2, ModelMap modelo, MultipartFile archivo) { //@RequestParam significa parametro requerido y ModelMap modelo para poder interactuar con el html
 
         try {
             usuarioServicio.registrar(archivo, nombre, email, password, password2);
 
-            modelo.put("exito", "Usuario registrado correctamente!");
+            modelo.put("exito", "Usuario registrado correctamente!"); // Si se registra con exito, va a lanzar un mensaje de exito a traves del modelo 
 
             //return "index.html"; //retornando al index no muestra el mensaje de exito
             return "registro.html";
         } catch (MiException ex) {
 
-            modelo.put("error", ex.getMessage());
+            modelo.put("error", ex.getMessage()); // Si no se registra lanza un mensaje de error, el mensaje de las validaciones
             modelo.put("nombre", nombre);
             modelo.put("email", email);
 
@@ -53,7 +53,9 @@ public class PortalControlador {
         }
 
     }
-
+    
+    
+    //Al ingresar al /login podia o no, venir un error, por eso el @RequestParam(required = false), no esta requerido
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
 
