@@ -65,12 +65,15 @@ public class PortalControlador {
 
         return "login.html";
     }
-
+    
+    //Para poder ingresar /inicio y al metodo interno String inicio, 
+    //necesito estar logueado como USER o ADMIN, mediante @PreAuthorize
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
-    public String inicio(HttpSession session) {
+    public String inicio(HttpSession session) { //Este metodo recibe un objeto del tipo HttpSession
 
-        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+        //Este usuario logueado, contiene todos los datos de la session
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession"); //"usuariosession" es la llave, que contiene al usuario que abrio la sesion en el sistema
 
         if (logueado.getRol().toString().equals("ADMIN")) {
             return "redirect:/admin/dashboard";

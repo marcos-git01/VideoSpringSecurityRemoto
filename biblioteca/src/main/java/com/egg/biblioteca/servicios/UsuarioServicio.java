@@ -196,12 +196,18 @@ public class UsuarioServicio implements UserDetailsService {
             GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString()); //ROLE_USER por ejemplo
 
             permisos.add(p);
-
-            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-
-            HttpSession session = attr.getRequest().getSession(true);
-
-            session.setAttribute("usuariosession", usuario);
+            
+            //Vamos a interceptar en este punto, ya sabemos que el usuario ingreso a la plataforma y le dimos los permisos
+            //Vamos atrapar ese usuario, que ya esta autenticado y guardarlo en la sesion web
+            //Esta llamada lo que hace, es recuperar los atributos del Request, de la solicitud http
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
+            
+            //Y esos atributos los guardamos en el objeto session de la interface HttpSession
+            HttpSession session = attr.getRequest().getSession(true); // y de los atributos queremos la session, .getSession(true)
+            
+            //Y en esta session, vamos a seter los atributos, mediante la llave "usuariosession", 
+            //va a viajar los valores del usuario que habiamos buscado al principio en la primer linea del metodo
+            session.setAttribute("usuariosession", usuario); 
 
             return new User(usuario.getEmail(), usuario.getPassword(), permisos);
         } else {

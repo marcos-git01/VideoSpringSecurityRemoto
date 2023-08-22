@@ -32,9 +32,9 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                .authorizeRequests() //Va autorizar determinados parametros
-                    .antMatchers("/admin/*").hasRole("ADMIN") //.antMatchers siempre que estemos ingresando a determinadas
-                    .antMatchers("/css/*", "/js/*", "/img/*", "/**") // partes del sistema permita todos los archivos cuyas rutas tengan:
+                .authorizeRequests() //Va autorizar determinados parametros, .antMatchers siempre que estemos ingresando a determinadas partes
+                    .antMatchers("/admin/*").hasRole("ADMIN") // para ingresar a /admin/*, lo que sea, solo se puede acceder si tenemos rol Admin
+                    .antMatchers("/css/*", "/js/*", "/img/*", "/**") // para ingresar a las partes establecidas del sistema permita todos los archivos cuyas rutas definamos
                     .permitAll() // Van a ser permitidos por cualquier persona que acceda al sistema
                 .and().formLogin() // Esto pertenece al formulario de login
                     .loginPage("/login") //Esta linea indica donde esta la pagina de login
@@ -44,11 +44,11 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
                     .defaultSuccessUrl("/inicio") //Si el login es correcto, se dirige a url /inicio
                     .permitAll()
                 .and().logout() //Esto es la salida de nuestro sistema
-                    .logoutUrl("/logout") // url para cerrar la sesion
+                    .logoutUrl("/logout") // url para cerrar la sesion. Tanto /logout como /logincheck no necesitan controlador, Spring Security se encarga 
                     .logoutSuccessUrl("/") //logoutSuccessUrl("/") con la / retorna al index, si la sesion se cerro correctamente
                     .permitAll()
                 .and().csrf()
-                .disable();
+                .disable(); //Estas lineas son para que se deshabilite una caracteristicas de Spring Security
 
     }
 

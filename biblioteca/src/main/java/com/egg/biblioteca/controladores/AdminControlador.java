@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin") //Con el @RequestMapping ingresamos a la url /admin, a todo lo que tiene esta clase 
 public class AdminControlador {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    @GetMapping("/dashboard")
+    @GetMapping("/dashboard") //Con /dashboard accedemos al metodo panelAdminstrativo, que no retorna panel.html
     public String panelAdministrativo() {
         return "panel.html";
     }
