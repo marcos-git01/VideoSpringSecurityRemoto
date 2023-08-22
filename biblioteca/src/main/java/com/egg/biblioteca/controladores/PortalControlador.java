@@ -86,7 +86,7 @@ public class PortalControlador {
     @GetMapping("/perfil")
     public String perfil(ModelMap modelo, HttpSession session) {
         Usuario usuario = (Usuario) session.getAttribute("usuariosession");
-        modelo.put("usuario", usuario);
+        modelo.put("usuario", usuario); //Con esta linea autocompleto los datos del usuario que inicio session y accedo a usuario_modificar.html
         return "usuario_modificar.html";
     }
 

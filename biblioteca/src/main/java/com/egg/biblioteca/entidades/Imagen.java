@@ -16,13 +16,16 @@ public class Imagen {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-    private String mime;
+    private String mime; //Es el atributo que asigna el formato del tipo archivo de la imagen
 
     private String nombre;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    private byte[] contenido;
+    @Lob 
+    //le informamos a Spring que este dato puede ser grande, pesado, muchos bytes    
+    @Basic(fetch = FetchType.LAZY) 
+    //El tipo de carga va a ser perezosa, LAZY, el contenido el arreglo de bytes, 
+    //se va a cargar solamente cuando lo pidamos, haciendo que las query sean mas livianas
+    private byte[] contenido; //Arreglo de byte, que va a ser la forma en la que se va a guardar el contenido de la imagen
 
     public Imagen() {
     }

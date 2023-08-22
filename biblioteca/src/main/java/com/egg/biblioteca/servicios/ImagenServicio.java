@@ -12,9 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class ImagenServicio {
 
     @Autowired
-    private ImagenRepositorio imagenRepositorio;
+    private ImagenRepositorio imagenRepositorio; //hacemos un llamado al ImagenRepositorio, para poder utilizar sus metodos
 
-    public Imagen guardar(MultipartFile archivo) throws MiException {
+    //MultipartFile es el tipo de archivo en el que se va almacenar la imagen
+    public Imagen guardar(MultipartFile archivo) throws MiException { 
         if (archivo != null) {
             try {
 
@@ -29,7 +30,7 @@ public class ImagenServicio {
                 return imagenRepositorio.save(imagen);
 
             } catch (Exception e) {
-                System.err.println(e.getMessage()); //err: el mensaje va a ser de color rojo
+                System.err.println(e.getMessage()); //err: el mensaje va a ser de color rojo, lanza un mensaje de error por consola
             }
         }
         return null;
