@@ -10,13 +10,21 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ErroresControlador implements ErrorController {
 
+    //El @RequestMapping esta al nivel del metodo
+    //Entra todo recurso que venga con /error, sea del metodo GET o POST
+    //va a ingresar a este metodo
     @RequestMapping(value = "/error", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView renderErrorPage(HttpServletRequest httpRequest) {
+    //Recuperamos el codigo de error que viene del servidor, y en base a eso
+    //establecemos un mensaje en particular que pasa por el switch, y al final redirecciona a error.html
+    //El metodo recibe una peticion http httpRequest
+    public ModelAndView renderErrorPage(HttpServletRequest httpRequest) { 
 
+        //creamos una pagina de error que seria error.html
         ModelAndView errorPage = new ModelAndView("error");
 
         String errorMsg = "";
 
+        // tenemos un entero del codigo de status que sale del metodo getErrorCode
         int httpErrorCode = getErrorCode(httpRequest);
 
         switch (httpErrorCode) {
@@ -41,12 +49,16 @@ public class ErroresControlador implements ErrorController {
                 break;
             }
         }
-
+        
+        //en la pagina errorPage injecta el codigo y el mensaje
         errorPage.addObject("codigo", httpErrorCode);
         errorPage.addObject("mensaje", errorMsg);
         return errorPage;
     }
 
+    //el metodo recibe la peticion http, y trae el atributo 
+    //del status del codigo y castearlo a un entero y de esta forma nos retorna
+    //en formato de entero el codigo de estatus de la peticion
     private int getErrorCode(HttpServletRequest httpRequest) {
         return (Integer) httpRequest.getAttribute("javax.servlet.error.status_code");
     }

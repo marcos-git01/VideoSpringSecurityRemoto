@@ -45,6 +45,7 @@ public class LibroServicio {
         libro.setAlta(new Date());
 
         libro.setAutor(autor);
+        
         libro.setEditorial(editorial);
 
         libroRepositorio.save(libro);
